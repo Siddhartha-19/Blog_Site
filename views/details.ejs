@@ -1,0 +1,35 @@
+<html lang="en">
+<%- include("./partials/head.ejs") %>
+
+<body>
+  <%- include("./partials/nav.ejs") %>
+
+  <div class="details content">
+    <h2><%= blog.title %></h2>
+    <div class="content">
+      <p><%= blog.body %></p>
+    </div>
+    <a class="delete" data-doc="<%= blog.id %>">delete</a>
+  </div>
+
+  <%- include("./partials/footer.ejs") %>
+
+<script>
+    const del_blog=document.querySelector('a.delete');
+    
+    del_blog.addEventListener('click',(e)=>
+{
+    console.log(del_blog.dataset.doc);
+    const endpoint = `/blogs/${del_blog.dataset.doc}`;
+    fetch(endpoint,{
+        method:'DELETE',
+    }).then(()=>{}).catch((err)=>
+{
+    console.log(err);
+})
+
+})
+
+</script>
+</body>
+</html>
